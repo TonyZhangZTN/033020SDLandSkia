@@ -1,6 +1,7 @@
 #include "model.h"
 #include "GUI.h"
 #include "AssetsHelper.h"
+#include "MusicHelper.h"
 
 Model model1;
 Model model2;
@@ -196,17 +197,8 @@ int main(int argc, char **argv) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     SDL_GL_SwapWindow(window);
-    string path__(SDL_AndroidGetInternalStoragePath());
-    path__ += "/bgm2.mp3:q";
-    LOGI("mp3Path:%s", path__.c_str());
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048))
-        LOGE("error while opening audio:%s", Mix_GetError());
-    Mix_Music *sound = Mix_LoadMUS(path__.c_str());
-    LOGE("error while playing music:%s", Mix_GetError());
-    if (Mix_PlayMusic(sound, 1))
-        LOGE("error while playing music:%s", Mix_GetError());
-
-
+    MusicHelper *musicHelper = new MusicHelper(string(SDL_AndroidGetInternalStoragePath()));
+    musicHelper->PlayMusic("/test.flac");
     //初始化gles程序
     glesInit();
     bool running = true;
