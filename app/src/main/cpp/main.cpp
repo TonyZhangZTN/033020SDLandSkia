@@ -199,6 +199,7 @@ int main(int argc, char **argv) {
     SDL_GL_SwapWindow(window);
     MusicHelper *musicHelper = new MusicHelper(string(SDL_AndroidGetInternalStoragePath()));
     musicHelper->PlayMusic("/test.flac");
+    //
     //初始化gles程序
     glesInit();
     bool running = true;
